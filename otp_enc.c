@@ -21,7 +21,7 @@ char* readFile(char* fileName){
 	fread(textOut, fsize, 1, f);
 	fclose(f);
 	//add null terminator
-	textOut[strcspn(textOut, "\n")] = "%";
+	textOut[strcspn(textOut, "\n") -1 ] = "%";
 
 	//File verification
 	int i = 0;
