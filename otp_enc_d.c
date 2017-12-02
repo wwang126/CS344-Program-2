@@ -14,12 +14,9 @@ char* encode(char* plainText, char* keyText){
 	char* encodeText = malloc(strlen(plainText));
 	int i = 0;
 	char in = ' ';
-	printf("Plaintext is : %s", plainText);
-	printf("Keytext is: %s", keyText);
 	while(plainText[i] != '\0'){
 		in = plainText[i];
 		char key = keyText[i];
-		printf("Plain: %c, Key: %c, ", in, key);
 		//Convert chars into numbers
 		if(in == ' '){
 			in = 26;
@@ -44,9 +41,7 @@ char* encode(char* plainText, char* keyText){
 			encode = encode + 65;
 		}
 		encodeText[i] = encode;
-		printf("Encode: %c\n", encode);
 		i++;
-		printf("Plain in: %c", plainText[i]);
 	}
 	return encodeText;
 }
