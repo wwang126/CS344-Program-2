@@ -28,11 +28,9 @@ char* readFile(char* fileName){
 	fsize--;
 	while(i < fsize){
 		char curr = textOut[i];
-		printf("Reading : %c , %d\n", curr ,curr);
 		if(curr != ' '){
-			printf("Checking character: %c , %d\n", curr, curr);
 			if(curr < 65 || curr > 90){
-				printf("Error! Invalid Message!");
+				perror("Error! Invalid Message!");
 				free(textOut);
 				exit(1);
 			}
