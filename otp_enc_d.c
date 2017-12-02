@@ -109,6 +109,7 @@ int main(int argc, char *argv[])
 				plainText[i] = curr;
 				i++;
 			}
+			plainText[i - 1] = '\0';
 			int j = 0;
 			while(curr != '^'){
 				curr = buffer[i];
@@ -116,6 +117,7 @@ int main(int argc, char *argv[])
 				i++;
 				j++;
 			}
+			keyText[j - 1] = '\0';
 			printf("Plain: %s \n\n",plainText);
 			printf("Key: %s \n\n", keyText);
 
