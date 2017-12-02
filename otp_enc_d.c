@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
 				plainText[i] = curr;
 				i++;
 			}
+			//Get key text 
 			plainText[i - 1] = '\0';
 			int j = 0;
 			while(curr != '^'){

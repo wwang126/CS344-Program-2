@@ -47,7 +47,9 @@ int main(int argc, char *argv[])
 	int socketFD, portNumber, charsWritten, charsRead;
 	struct sockaddr_in serverAddress;
 	struct hostent* serverHostInfo;
-	char buffer[200000];//128kilobyte file
+	//store data
+	char buffer[200000];
+	char encodeText[200000];
 
 	if (argc < 3) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); } // Check usage & args
 
@@ -92,10 +94,18 @@ int main(int argc, char *argv[])
 	do{
 		charsRead = recv(socketFD, buffer + strlen(buffer), 64, 0); // Read data from the socket, leaving \0 at end
 		if (charsRead < 0) error("CLIENT: ERROR reading from socket");
-		if (strstr(buffer, "^") > 0){
+		if (strstr(buffer, "^") > 0){//if end break loop
 			break;
 		}
 	}while(charsRead > 0);
+	//remove end char
+	char curr = '0';
+	int i = 0;
+	while(buffer[i] != '^'){
+		curr = buffer[i];
+		encodeText[i] = curr;
+		i++;
+	}
 
 	printf("CLIENT: I received this from the server: \"%s\"\n", buffer);
 
