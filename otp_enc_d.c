@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 			plainText[i - 1] = '\0';
 
 			//Get key text
-			memset(keyTex, '\0',200000);
+			memset(keyText, '\0',200000);
 			int j = 0;
 			while(curr != '^'){
 				curr = buffer[i];
