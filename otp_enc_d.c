@@ -105,6 +105,7 @@ int main(int argc, char *argv[])
 			}while(charsRead > 0);
 			//Check for flag
 			char* readIn = strtok(buffer,'*');
+			printf("Strokworking");
 			//If wrong
 			if(readIn == NULL){
 				// Send message back
