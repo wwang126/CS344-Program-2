@@ -102,6 +102,8 @@ int main(int argc, char *argv[])
 			}while(charsRead > 0);
 			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 			memset(plainText, '\0', 200000);
+
+			//Break apart plain text and key
 			char curr = '0';
 			int i = 0;
 			while(curr != '%'){
@@ -120,6 +122,9 @@ int main(int argc, char *argv[])
 			keyText[j - 1] = '\0';
 			printf("Plain: %s \n\n",plainText);
 			printf("Key: %s \n\n", keyText);
+
+			encodeText = encode(plainText,keyText);
+			printf("Encryted text", encodeText);
 
 			// Send message back
 			memset(buffer, '\0',200000);
