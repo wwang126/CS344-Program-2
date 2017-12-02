@@ -93,6 +93,9 @@ int main(int argc, char *argv[])
 				//Read in a packet of size 64
 				charsRead = recv(establishedConnectionFD, buffer + strlen(buffer), 64, 0);
 				if (charsRead < 0) error("ERROR reading from socket");
+				if (strstr(buffer, "\n") > 0){
+					break;
+				}
 			}while(charsRead > 0);
 			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 
