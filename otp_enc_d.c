@@ -113,13 +113,12 @@ int main(int argc, char *argv[])
 				close(listenSocketFD); // Close the listening socket
 				exit(0);//Kill child
 			}
-			buffer += 1; 
 			//Get plain text
 			memset(plainText, '\0', 200000);
 			char curr = '0';
 			int i = 0;
 			while(curr != '%'){
-				curr = buffer[i];
+				curr = buffer[i+1];
 				plainText[i] = curr;
 				i++;
 			}
@@ -129,7 +128,7 @@ int main(int argc, char *argv[])
 			memset(keyText, '\0',200000);
 			int j = 0;
 			while(curr != '^'){
-				curr = buffer[i];
+				curr = buffer[i+1];
 				keyText[j] = curr;
 				i++;
 				j++;
