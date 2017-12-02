@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 			printf("Plain: %s \n\n",plainText);
 			printf("Key: %s \n\n", keyText);
 
-			encodeText = encode(plainText,keyText);
+			char* encodeText = encode(plainText,keyText);
 			printf("Encryted text", encodeText);
 
 			// Send message back
