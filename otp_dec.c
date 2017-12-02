@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 	//read in key text file
 	char* keyText = readFile(argv[2]);
 
-	//Check key length 
+	//Check key length
 	if(strlen(plainText) < strlen(keyText)){
 		error("Key too small!");
 	}
