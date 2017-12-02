@@ -13,7 +13,7 @@ char* encode(char* plainText, char* keyText){
 	}
 	char* encodeText = malloc(sizeof(plainText));
 	int i = 0;
-	while(i < sizeof(plainText)){
+	while(i < strlen(plainText)){
 		char in = plainText[i];
 		char key = keyText[i];
 		printf("Plain: %c, Key: %c, ", in, key);
