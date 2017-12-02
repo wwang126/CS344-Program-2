@@ -41,7 +41,7 @@ char* encode(char* plainText, char* keyText){
 			encode = encode + 65;
 		}
 		encodeText[i] = encode;
-		printf("Encode: %c\n", Encode);
+		printf("Encode: %c\n", encode);
 		i++;
 	}
 	return encodeText;
