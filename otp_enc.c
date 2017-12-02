@@ -28,6 +28,7 @@ char* readFile(char* fileName){
 	fsize--;
 	while(i < fsize){
 		char curr = textOut[i];
+		printf("Reading : %c , %d", curr ,curr);
 		if(curr != 32 || curr != 10){
 			if(curr < 65 || curr > 90){
 				printf("Error! Invalid Message!");
