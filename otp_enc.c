@@ -108,6 +108,7 @@ int main(int argc, char *argv[])
 	}
 
 	printf("CLIENT: I received this from the server: \"%s\"\n", buffer);
+	printf(encodeText);
 
 	close(socketFD); // Close the socket
 	return 0;
