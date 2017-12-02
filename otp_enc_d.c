@@ -16,6 +16,7 @@ char* encode(char* plainText, char* keyText){
 	while(i < sizeof(plainText)){
 		char in = plainText[i];
 		char key = keyText[i];
+		printf("Plain: %c, Key: %c, ", in, key);
 		//Convert chars into numbers
 		if(in == ' '){
 			in = 26;
@@ -23,6 +24,7 @@ char* encode(char* plainText, char* keyText){
 		else{
 			in = in - 65;
 		}
+		//convert keys into numbers
 		if(key == ' '){
 			key = 26;
 		}
@@ -39,6 +41,7 @@ char* encode(char* plainText, char* keyText){
 			encode = encode + 65;
 		}
 		encodeText[i] = encode;
+		printf("Encode: %c\n", Encode);
 		i++;
 	}
 	return encodeText;
