@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 			char curr = '0';
 			int i = 0;
 			while(curr != '%'){
-				curr = buffer[0];
+				curr = buffer[i];
 				plainText[i] = curr;
 				i++;
 			}
