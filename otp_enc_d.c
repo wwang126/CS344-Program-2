@@ -16,7 +16,7 @@ char* encode(char* plainText, char* keyText){
 	char in = ' ';
 	printf("Plaintext is : %s", plainText);
 	printf("Keytext is: %s", keyText);
-	while(in != '\0'){
+	while(plainText[i] != '\0'){
 		in = plainText[i];
 		char key = keyText[i];
 		printf("Plain: %c, Key: %c, ", in, key);
