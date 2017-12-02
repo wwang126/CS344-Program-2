@@ -103,10 +103,21 @@ int main(int argc, char *argv[])
 					break;
 				}
 			}while(charsRead > 0);
+			//Check for flag
+			char* readIn = strtok(buffer,'*');
+			//If wrong
+			if(readIn == NULL){
+				// Send message back
+				memset(buffer, '\0',200000);
+				charsRead = send(establishedConnectionFD, "Wrong Server!", 14, 0);
+				if (charsRead < 0) error("ERROR writing to socket");
+				close(establishedConnectionFD); // Close the existing socket which is connected to the client
+				close(listenSocketFD); // Close the listening socket
+				exit(0);//Kill child
+			}
 
+			//Get plain text
 			memset(plainText, '\0', 200000);
-
-			//Break apart plain text and key
 			char curr = '0';
 			int i = 0;
 			while(curr != '%'){
@@ -114,8 +125,10 @@ int main(int argc, char *argv[])
 				plainText[i] = curr;
 				i++;
 			}
-			//Get key text
 			plainText[i - 1] = '\0';
+
+			//Get key text
+			memset(keyTex, '\0',200000);
 			int j = 0;
 			while(curr != '^'){
 				curr = buffer[i];
@@ -126,7 +139,7 @@ int main(int argc, char *argv[])
 			keyText[j - 1] = '\0';
 			//Encrypt the text
 			char* encodeText = encode(plainText,keyText);
-			//Add end text 
+			//Add end text
 			encodeText[strlen(encodeText)] = '^';
 
 			// Send message back

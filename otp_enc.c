@@ -78,8 +78,10 @@ int main(int argc, char *argv[])
 
 	// Clear out the buffer array
 	memset(buffer, '\0', sizeof(buffer));
+	//Set flag
+	buffer[0] = '*'
 	//Copy text file into buffer
-	strcpy(buffer,plainText);
+	strcat(buffer,plainText);
 	buffer[strlen(plainText)] = '%';
 	strcat(buffer,keyText);
 	buffer[strlen(plainText) + strlen(keyText) + 1] = '^';
