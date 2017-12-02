@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 			keyText[j - 1] = '\0';
 			char* encodeText = encode(plainText,keyText);
 			printf("Encryted text %s\n", encodeText);
-			encodeText[strlen(encodeText)] = '^'
+			encodeText[strlen(encodeText)] = '^';
 
 			// Send message back
 			memset(buffer, '\0',200000);
