@@ -6,10 +6,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+void error(const char *msg) { perror(msg); exit(1); } // Error function used for reporting issues
+
 char* encode(char* plainText, char* keyText){
 	if(strlen(keyText) < strlen(plainText)){
-		perror("Key too small!");
-		exit(1);
+		error("Key too small!");
 	}
 	char* encodeText = malloc(strlen(plainText)+1);
 	int i = 0;
@@ -48,9 +49,6 @@ char* encode(char* plainText, char* keyText){
 	}
 	return encodeText;
 }
-
-void error(const char *msg) { perror(msg); exit(1); } // Error function used for reporting issues
-
 int main(int argc, char *argv[])
 {
 	int listenSocketFD, establishedConnectionFD, portNumber, charsRead;
