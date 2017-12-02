@@ -10,7 +10,7 @@
 //Parse a text file and return a array of chracter, 0 if failed
 char* readFile(char* fileName){
 	//Read in plain text file
-	FILE *f = fopen(fileName, "rb");
+	FILE *f = fopen(fileName, "r");
 	//Move file pointer to end of file
 	fseek(f, 0, SEEK_END);
 	long fsize = ftell(f);
@@ -23,19 +23,19 @@ char* readFile(char* fileName){
 	//add null terminator
 	textOut[strcspn(textOut, "\n")] = 0;
 
-	// //File verification
-	// int i = 0;
-	// while(i < fsize){
-	// 	char curr = textOut[i];
-	// 	if(curr != 32){
-	// 		if(curr < 65 || curr > 90){
-	// 			printf("Error!");
-	// 			free(textOut);
-	// 			return 0;
-	// 		}
-	// 	}
-	// 	i++;
-	// }
+	//File verification
+	int i = 0;
+	while(i < fsize){
+		char curr = textOut[i];
+		if(curr != 32){2
+			if(curr < 65 || curr > 90){
+				printf("Error!");
+				free(textOut);
+				exit(1);
+			}
+		}
+		i++;
+	}
 
 	return textOut;
 }
