@@ -101,10 +101,21 @@ int main(int argc, char *argv[])
 				}
 			}while(charsRead > 0);
 			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
-			char* plain = strtok(buffer, '^');
-			strcpy(plainText,plain);
-			char* key = strtok(buffer,'^');
-			strcpy(keyText,key);
+			memset(plainText, '\0', 200000);
+			char curr = '0';
+			int i = 0;
+			while(curr != '%'){
+				curr = buffer[0];
+				plainText[i] = curr;
+				i++
+			}
+			int j = 0;
+			while(curr != '^'){
+				curr = buffer[i];
+				keyText[j] = curr;
+				i++
+				j++;
+			}
 			printf("Plain: %s \n\n",plainText);
 			printf("Key: %s \n\n", keyText);
 
