@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 
 char* encode(char* plainText, char* key){
-	if(sizeof(key) < sizeof(plainText)){
+	if(strlen(key) < strlen(plainText)){
 		perror("Key too small!");
 		exit(1);
 	}
@@ -71,19 +71,41 @@ int main(int argc, char *argv[])
 
 	// Accept a connection, blocking if one is not available until one connects
 	sizeOfClientInfo = sizeof(clientAddress); // Get the size of the address for the client that will connect
-	establishedConnectionFD = accept(listenSocketFD, (struct sockaddr *)&clientAddress, &sizeOfClientInfo); // Accept
-	if (establishedConnectionFD < 0) error("ERROR on accept");
 
-	// Get the message from the client and display it
-	memset(buffer, '\0', 65536);
-	charsRead = recv(establishedConnectionFD, buffer, 65535, 0); // Read the client's message from the socket
-	if (charsRead < 0) error("ERROR reading from socket");
-	printf("SERVER: I received this from the client: \"%s\"\n", buffer);
+	/**Start Accepting connections here**/
 
-	// Send a Success message back to the client
-	charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
-	if (charsRead < 0) error("ERROR writing to socket");
-	close(establishedConnectionFD); // Close the existing socket which is connected to the client
-	close(listenSocketFD); // Close the listening socket
-	return 0;
+	while(1){
+		//kill a hanging process, since you only accept one proccess at a time
+		int status;
+		pid_t pidWait = waitpid(-1, &status, WNOHANG);
+
+		establishedConnectionFD = accept(listenSocketFD, (struct sockaddr *)&clientAddress, &sizeOfClientInfo); // Accept
+		if (establishedConnectionFD < 0) error("ERROR on accept");
+
+		//Fork after accepting connection
+		pit_t pid = fork();
+		//If child
+		if(pid == 0){
+			// Get the message from the client and display it
+			memset(buffer, '\0', 65536);
+			charsRead = recv(establishedConnectionFD, buffer, 65535, 0); // Read the client's message from the socket
+			if (charsRead < 0) error("ERROR reading from socket");
+			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
+
+			// Send a Success message back to the client
+			charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
+			if (charsRead < 0) error("ERROR writing to socket");
+			close(establishedConnectionFD); // Close the existing socket which is connected to the client
+			close(listenSocketFD); // Close the listening socket
+		}
+		//If parent
+		else if(pid > 0){
+			//do nothing
+		}
+		//If error
+		else{
+			error("SERVER: Fork Error!");
+		}
+		return 0;
+	}
 }
