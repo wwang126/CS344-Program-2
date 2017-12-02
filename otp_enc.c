@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 	memset(buffer, '\0', sizeof(buffer));
 	//Copy text file into buffer
 	strcpy(buffer,plainText);
-	buffer[sizeof(plainText)] = '%';
+	buffer[strlen(plainText)] = '%';
 	// Send message to server
 	// Write to the server
 	charsWritten = send(socketFD, buffer, strlen(buffer), 0);
