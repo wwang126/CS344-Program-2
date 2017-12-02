@@ -49,7 +49,10 @@ int main(int argc, char *argv[])
 {
 	int listenSocketFD, establishedConnectionFD, portNumber, charsRead;
 	socklen_t sizeOfClientInfo;
-	char buffer[200000];//64kb buffer
+	//Create storage from strings
+	char buffer[200000];
+	char plainText[200000];
+	char keyText[200000];
 	struct sockaddr_in serverAddress, clientAddress;
 
 	if (argc < 2) { fprintf(stderr,"USAGE: %s port\n", argv[0]); exit(1); } // Check usage & args
@@ -98,7 +101,12 @@ int main(int argc, char *argv[])
 				}
 			}while(charsRead > 0);
 			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
-
+			char* plain = strtok(buffer, '^');
+			strcpy(plainText,plain);
+			char* key = strtok(buffer,'^');
+			strcpy(keyText,key);
+			printf("Plain: %s \n\n",plainText);
+			printf("Key: %s \n\n", keyText);
 
 			// Send message back
 			memset(buffer, '\0',200000);
