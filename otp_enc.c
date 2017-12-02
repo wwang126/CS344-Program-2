@@ -21,7 +21,7 @@ char* readFile(char* fileName){
 	fread(textOut, fsize, 1, f);
 	fclose(f);
 	//add null terminator
-	//textOut[strcspn(textOut, "\n") -1 ] = "%";
+	textOut[strcspn(textOut, "\n") -1 ] = 0;
 
 	//File verification
 	int i = 0;
@@ -37,7 +37,6 @@ char* readFile(char* fileName){
 		}
 		i++;
 	}
-	textOut[strcspn(textOut, "\n") -1 ] = '%';
 	return textOut;
 }
 
@@ -48,7 +47,7 @@ int main(int argc, char *argv[])
 	int socketFD, portNumber, charsWritten, charsRead;
 	struct sockaddr_in serverAddress;
 	struct hostent* serverHostInfo;
-	char buffer[131072];//128kilobyte file
+	char buffer[200000];//128kilobyte file
 
 	if (argc < 3) { fprintf(stderr,"USAGE: %s hostname port\n", argv[0]); exit(0); } // Check usage & args
 
@@ -79,7 +78,7 @@ int main(int argc, char *argv[])
 	memset(buffer, '\0', sizeof(buffer));
 	//Copy text file into buffer
 	strcpy(buffer,plainText);
-
+	buffer[sizeof(plainText)] = '%';
 	// Send message to server
 	// Write to the server
 	charsWritten = send(socketFD, buffer, strlen(buffer), 0);
