@@ -23,6 +23,7 @@ char* readFile(char* fileName){
 	//add null terminator
 	textOut[strcspn(textOut, "\n")] = 0;
 
+	return textOut;
 }
 
 void error(const char *msg) { perror(msg); exit(0); } // Error function used for reporting issues
