@@ -39,6 +39,7 @@ char* encode(char* plainText, char* keyText){
 			encode = encode + 65;
 		}
 		encodeText[i] = encode;
+		i++;
 	}
 	return encodeText;
 }
