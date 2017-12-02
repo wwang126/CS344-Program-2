@@ -6,6 +6,42 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+char* encode(char* plainText, char* key){
+	if(sizeof(key) < sizeof(plainText)){
+		perror("Key too small!");
+		exit(1);
+	}
+	char* encodeText = malloc(sizeof(plainText));
+	int i = 0;
+	while(i < sizeof(plainText)){
+		char in = plainText[i];
+		char key = key[i];
+		//Convert chars into numbers
+		if(in == " "){
+			in = 26;
+		}
+		else{
+			in = in - 65;
+		}
+		if(key == " "){
+			key = 26;
+		}
+		else{
+			key = key - 65;
+		}
+		//Encode the character
+		char encode = (in + key)%27;
+		//Convert character back to char
+		if(encode == 26){
+			encode == ' '
+		}
+		else{
+			encode = encode + 65;
+		}
+		encodeText[i] = encode;
+	}
+}
+
 void error(const char *msg) { perror(msg); exit(1); } // Error function used for reporting issues
 
 int main(int argc, char *argv[])
