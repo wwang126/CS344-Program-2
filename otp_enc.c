@@ -35,8 +35,6 @@ int main(int argc, char *argv[])
 	if (connect(socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) // Connect socket to address
 		error("CLIENT: ERROR connecting");
 
-	// Save user args
-	char* key = argv[2];
 
 	//Read in plain text file
 	FILE *f = fopen(argv[1], "rb");
@@ -52,7 +50,7 @@ int main(int argc, char *argv[])
 
 
 	//Read in key text file
-	*f = fopen(argv[1], "rb");
+	f = fopen(argv[2], "rb");
 	fseek(f, 0, SEEK_END);
 	fsize = ftell(f);
 	fseek(f, 0, SEEK_SET);  //same as rewind(f);
