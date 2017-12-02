@@ -11,7 +11,7 @@ char* encode(char* plainText, char* keyText){
 		perror("Key too small!");
 		exit(1);
 	}
-	char* encodeText = malloc(sizeof(plainText));
+	char* encodeText = malloc(strlen(plainText));
 	int i = 0;
 	char in = ' ';
 	printf("Plaintext is : %s", plainText);
@@ -35,7 +35,7 @@ char* encode(char* plainText, char* keyText){
 			key = key - 65;
 		}
 		//Encode the character
-		char encode = (in + key)%26;
+		char encode = (in + key)%27;
 		//Convert character back to char
 		if(encode == 26){
 			encode = ' ';
