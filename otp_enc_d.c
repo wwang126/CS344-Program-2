@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 {
 	int listenSocketFD, establishedConnectionFD, portNumber, charsRead;
 	socklen_t sizeOfClientInfo;
-	char buffer[65536];//64kb buffer
+	char buffer[200000];//64kb buffer
 	struct sockaddr_in serverAddress, clientAddress;
 
 	if (argc < 2) { fprintf(stderr,"USAGE: %s port\n", argv[0]); exit(1); } // Check usage & args
@@ -88,17 +88,22 @@ int main(int argc, char *argv[])
 		//If child
 		if(pid == 0){
 			// Get the message from the client and display it
-			memset(buffer, '\0', 65536);
-			charsRead = recv(establishedConnectionFD, buffer, 65535, 0); // Read the client's message from the socket
-			if (charsRead < 0) error("ERROR reading from socket");
+			memset(buffer, '\0', 200000);
+			do{
+				//Read in a packet of size 64
+				charsRead = recv(establishedConnectionFD, buffer + strlen(buffer), 64, 0);
+				if (charsRead < 0) error("ERROR reading from socket");
+			}while(charsRead > 0);
 			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
 
-			// Send a Success message back to the client
+
+			// Send message back
+			memset(buffer, '\0',200000);
 			charsRead = send(establishedConnectionFD, "I am the server, and I got your message", 39, 0); // Send success back
 			if (charsRead < 0) error("ERROR writing to socket");
 			close(establishedConnectionFD); // Close the existing socket which is connected to the client
 			close(listenSocketFD); // Close the listening socket
-			exit(0);
+			exit(0);//Kill child
 		}
 		//If parent
 		else if(pid > 0){
