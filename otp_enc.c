@@ -25,11 +25,12 @@ char* readFile(char* fileName){
 
 	//File verification
 	int i = 0;
+	fsize--;
 	while(i < fsize){
 		char curr = textOut[i];
-		if(curr != 32){
+		if(curr != 32 || curr != 10){
 			if(curr < 65 || curr > 90){
-				printf("Error!");
+				printf("Error! Invalid Message!");
 				free(textOut);
 				exit(1);
 			}
