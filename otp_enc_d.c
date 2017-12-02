@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 					break;
 				}
 			}while(charsRead > 0);
-			printf("SERVER: I received this from the client: \"%s\"\n", buffer);
+
 			memset(plainText, '\0', 200000);
 
 			//Break apart plain text and key
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 				plainText[i] = curr;
 				i++;
 			}
-			//Get key text 
+			//Get key text
 			plainText[i - 1] = '\0';
 			int j = 0;
 			while(curr != '^'){
@@ -124,8 +124,9 @@ int main(int argc, char *argv[])
 				j++;
 			}
 			keyText[j - 1] = '\0';
+			//Encrypt the text
 			char* encodeText = encode(plainText,keyText);
-			printf("Encryted text %s\n", encodeText);
+			//Add end text 
 			encodeText[strlen(encodeText)] = '^';
 
 			// Send message back

@@ -106,9 +106,8 @@ int main(int argc, char *argv[])
 		encodeText[i] = curr;
 		i++;
 	}
-
-	printf("CLIENT: I received this from the server: \"%s\"\n", buffer);
-	printf(encodeText);
+	//Print out encoded text
+	printf("%s\n",encodeText);
 
 	close(socketFD); // Close the socket
 	return 0;
