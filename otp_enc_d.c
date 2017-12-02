@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
 			if (charsRead < 0) error("ERROR writing to socket");
 			close(establishedConnectionFD); // Close the existing socket which is connected to the client
 			close(listenSocketFD); // Close the listening socket
+			exit(0);
 		}
 		//If parent
 		else if(pid > 0){
@@ -108,5 +109,6 @@ int main(int argc, char *argv[])
 			error("SERVER: Fork Error!");
 		}
 	}
+	//TODO: Remove immortality
 	return 0;
 }
