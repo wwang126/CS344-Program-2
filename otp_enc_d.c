@@ -35,7 +35,7 @@ char* encode(char* plainText, char* keyText){
 			key = key - 65;
 		}
 		//Encode the character
-		char encode = (in + key)%27;
+		char encode = (in + key)%26;
 		//Convert character back to char
 		if(encode == 26){
 			encode = ' ';
@@ -46,6 +46,7 @@ char* encode(char* plainText, char* keyText){
 		encodeText[i] = encode;
 		printf("Encode: %c\n", encode);
 		i++;
+		printf("Plain in: %c", plainText[i]);
 	}
 	return encodeText;
 }
