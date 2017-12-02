@@ -13,8 +13,9 @@ char* encode(char* plainText, char* keyText){
 	}
 	char* encodeText = malloc(sizeof(plainText));
 	int i = 0;
-	while(i < strlen(plainText)){
-		char in = plainText[i];
+	char in = ' ';
+	while(in != '\0'){
+		in = plainText[i];
 		char key = keyText[i];
 		printf("Plain: %c, Key: %c, ", in, key);
 		//Convert chars into numbers
