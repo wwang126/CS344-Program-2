@@ -23,3 +23,5 @@ clean:
 	rm keygen
 	rm otp_enc
 	rm otp_enc_d
+	rm otp_dec_d
+	rm otp_dec 
