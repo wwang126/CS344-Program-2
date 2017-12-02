@@ -79,6 +79,8 @@ int main(int argc, char *argv[])
 	//Copy text file into buffer
 	strcpy(buffer,plainText);
 	buffer[strlen(plainText)] = '%';
+	strcat(buffer,keyText);
+	buffer[strlen(plainText) + strlen(keyText) + 1] = '^';
 	// Send message to server
 	// Write to the server
 	charsWritten = send(socketFD, buffer, strlen(buffer), 0);
