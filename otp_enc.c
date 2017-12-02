@@ -37,7 +37,7 @@ char* readFile(char* fileName){
 		}
 		i++;
 	}
-	textOut[strcspn(textOut, "\n") -1 ] = "%";
+	textOut[strcspn(textOut, "\n") -1 ] = '%';
 	return textOut;
 }
 
