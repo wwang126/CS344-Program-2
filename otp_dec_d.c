@@ -33,6 +33,9 @@ char* encode(char* plainText, char* keyText){
 		}
 		//Encode the character
 		char encode = (in - key)%27;
+		if(encode < 0){
+			encode = encode + 27;
+		}
 		//Convert character back to char
 		if(encode == 0){
 			encode = ' ';
