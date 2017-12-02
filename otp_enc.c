@@ -27,7 +27,7 @@ char* readFile(char* fileName){
 	int i = 0;
 	while(i < fsize){
 		char curr = textOut[i];
-		if(curr != 32){2
+		if(curr != 32){
 			if(curr < 65 || curr > 90){
 				printf("Error!");
 				free(textOut);
