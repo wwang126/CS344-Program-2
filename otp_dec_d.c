@@ -32,13 +32,13 @@ char* encode(char* plainText, char* keyText){
 			key = key - 65;
 		}
 		//Encode the character
-		char encode = (in + key)%27;
+		char encode = (in - key)%27;
 		//Convert character back to char
 		if(encode == 26){
 			encode = ' ';
 		}
 		else{
-			encode = encode - 65;
+			encode = encode + 65;
 		}
 		encodeText[i] = encode;
 		i++;
