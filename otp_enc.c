@@ -7,6 +7,24 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
+
+char* readFile(char* fileName){
+	//Read in plain text file
+	FILE *f = fopen(argv[1], "rb");
+	//Move file pointer to end of file
+	fseek(f, 0, SEEK_END);
+	long fsize = ftell(f);
+	//rewind point to front
+	fseek(f, 0, SEEK_SET);
+
+	char *textOut = malloc(fsize + 1);
+	fread(textOut, fsize, 1, f);
+	fclose(f);
+	//add null terminator
+	buffer[strcspn(buffer, "\n")] = 0;
+
+}
+
 void error(const char *msg) { perror(msg); exit(0); } // Error function used for reporting issues
 
 int main(int argc, char *argv[])
@@ -35,35 +53,11 @@ int main(int argc, char *argv[])
 	if (connect(socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) // Connect socket to address
 		error("CLIENT: ERROR connecting");
 
+	//read in plain text file
+	char* plainText = readFile(arg[1]);
 
-	printf("Reading plaintext file\n");
-	//Read in plain text file
-	FILE *f = fopen(argv[1], "rb");
-	fseek(f, 0, SEEK_END);
-	long fsize = ftell(f);
-	fseek(f, 0, SEEK_SET);  //same as rewind(f);
-
-	char *plainText = malloc(fsize + 1);
-	fread(plainText, fsize, 1, f);
-	fclose(f);
-	//add null terminator
-	plainText[fsize] = 0;
-
-	printf("Reading key text file\n");
-	//Read in key text file
-	f = fopen(argv[2], "rb");
-	fseek(f, 0, SEEK_END);
-	fsize = ftell(f);
-	fseek(f, 0, SEEK_SET);  //same as rewind(f);
-
-	char *keyText = malloc(fsize + 1);
-	fread(keyText, fsize, 1, f);
-	fclose(f);
-	//add null terminator
-	keyText[fsize] = 0;
-
-
-
+	//read in key text file
+	char* keyText = readFile(arg[2]);
 
 	// Clear out the buffer array
 	memset(buffer, '\0', sizeof(buffer));
