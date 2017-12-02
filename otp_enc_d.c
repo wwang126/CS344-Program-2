@@ -103,11 +103,8 @@ int main(int argc, char *argv[])
 					break;
 				}
 			}while(charsRead > 0);
-			//Check for flag
-			char* readIn = strtok(buffer,'*');
-			printf("Strokworking");
 			//If wrong
-			if(readIn == NULL){
+			if(buffer[0] != '*'){
 				// Send message back
 				memset(buffer, '\0',200000);
 				charsRead = send(establishedConnectionFD, "Wrong Server!", 14, 0);
@@ -116,7 +113,7 @@ int main(int argc, char *argv[])
 				close(listenSocketFD); // Close the listening socket
 				exit(0);//Kill child
 			}
-
+			buffer += 1; 
 			//Get plain text
 			memset(plainText, '\0', 200000);
 			char curr = '0';
