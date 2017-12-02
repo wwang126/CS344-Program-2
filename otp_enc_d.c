@@ -19,26 +19,26 @@ char* encode(char* plainText, char* keyText){
 		char key = keyText[i];
 		//Convert chars into numbers
 		if(in == ' '){
-			in = 26;
+			in = 0;
 		}
 		else{
-			in = in - 65;
+			in = in - 64;
 		}
 		//convert keys into numbers
 		if(key == ' '){
-			key = 26;
+			key = 0;
 		}
 		else{
-			key = key - 65;
+			key = key - 64;
 		}
 		//Encode the character
 		char encode = (in + key)%27;
 		//Convert character back to char
-		if(encode == 26){
+		if(encode == 0){
 			encode = ' ';
 		}
 		else{
-			encode = encode + 65;
+			encode = encode + 64;
 		}
 		encodeText[i] = encode;
 		i++;
