@@ -107,6 +107,6 @@ int main(int argc, char *argv[])
 		else{
 			error("SERVER: Fork Error!");
 		}
-		return 0;
 	}
+	return 0;
 }
