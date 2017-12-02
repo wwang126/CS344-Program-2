@@ -120,9 +120,6 @@ int main(int argc, char *argv[])
 				j++;
 			}
 			keyText[j - 1] = '\0';
-			printf("Plain: %s \n\n",plainText);
-			printf("Key: %s \n\n", keyText);
-
 			char* encodeText = encode(plainText,keyText);
 			printf("Encryted text %s\n", encodeText);
 
