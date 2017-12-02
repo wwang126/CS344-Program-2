@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 		error("CLIENT: ERROR connecting");
 
 
+	printf("Reading plaintext file\n");
 	//Read in plain text file
 	FILE *f = fopen(argv[1], "rb");
 	fseek(f, 0, SEEK_END);
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
 	//add null terminator
 	plainText[fsize] = 0;
 
-
+	printf("Reading key text file\n");
 	//Read in key text file
 	f = fopen(argv[2], "rb");
 	fseek(f, 0, SEEK_END);
