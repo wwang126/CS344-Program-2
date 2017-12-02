@@ -107,13 +107,13 @@ int main(int argc, char *argv[])
 			while(curr != '%'){
 				curr = buffer[0];
 				plainText[i] = curr;
-				i++
+				i++;
 			}
 			int j = 0;
 			while(curr != '^'){
 				curr = buffer[i];
 				keyText[j] = curr;
-				i++
+				i++;
 				j++;
 			}
 			printf("Plain: %s \n\n",plainText);
