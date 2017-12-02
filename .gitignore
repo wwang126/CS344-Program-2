@@ -2,3 +2,7 @@ keygen.dSYM
 keygen
 client.c
 server.c
+otp_dec_d
+otp_dec
+otp_enc_d
+otp_enc
