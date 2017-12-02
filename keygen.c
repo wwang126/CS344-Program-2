@@ -5,8 +5,6 @@
 int main (int argc, char* argv[]){
     //convert arg into int val
     int keyLen = atoi(argv[1]);
-
-    printf("Number is :%d\n", keyLen);
     int i = 0;
     //Seed rng
     srand(time(NULL));
