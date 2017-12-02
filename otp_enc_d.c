@@ -6,8 +6,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-char* encode(char* plainText, char* key){
-	if(strlen(key) < strlen(plainText)){
+char* encode(char* plainText, char* keyText){
+	if(strlen(keyText) < strlen(plainText)){
 		perror("Key too small!");
 		exit(1);
 	}
@@ -15,15 +15,15 @@ char* encode(char* plainText, char* key){
 	int i = 0;
 	while(i < sizeof(plainText)){
 		char in = plainText[i];
-		char key = key[i];
+		char key = keyText[i];
 		//Convert chars into numbers
-		if(in == " "){
+		if(in == ' '){
 			in = 26;
 		}
 		else{
 			in = in - 65;
 		}
-		if(key == " "){
+		if(key == ' '){
 			key = 26;
 		}
 		else{
@@ -33,13 +33,14 @@ char* encode(char* plainText, char* key){
 		char encode = (in + key)%27;
 		//Convert character back to char
 		if(encode == 26){
-			encode == ' '
+			encode = ' ';
 		}
 		else{
 			encode = encode + 65;
 		}
 		encodeText[i] = encode;
 	}
+	return encodeText;
 }
 
 void error(const char *msg) { perror(msg); exit(1); } // Error function used for reporting issues
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
 		if (establishedConnectionFD < 0) error("ERROR on accept");
 
 		//Fork after accepting connection
-		pit_t pid = fork();
+		pid_t pid = fork();
 		//If child
 		if(pid == 0){
 			// Get the message from the client and display it
