@@ -9,9 +9,6 @@
 void error(const char *msg) { perror(msg); exit(1); } // Error function used for reporting issues
 
 char* encode(char* plainText, char* keyText){
-	if(strlen(keyText) < strlen(plainText)){
-		error("Key too small!");
-	}
 	char* encodeText = malloc(strlen(plainText)+1);
 	int i = 0;
 	char in = ' ';
