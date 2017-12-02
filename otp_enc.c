@@ -10,7 +10,7 @@
 
 char* readFile(char* fileName){
 	//Read in plain text file
-	FILE *f = fopen(argv[1], "rb");
+	FILE *f = fopen(fileName, "rb");
 	//Move file pointer to end of file
 	fseek(f, 0, SEEK_END);
 	long fsize = ftell(f);
@@ -21,7 +21,7 @@ char* readFile(char* fileName){
 	fread(textOut, fsize, 1, f);
 	fclose(f);
 	//add null terminator
-	buffer[strcspn(buffer, "\n")] = 0;
+	textOut[strcspn(buffer, "\n")] = 0;
 
 }
 
@@ -54,10 +54,10 @@ int main(int argc, char *argv[])
 		error("CLIENT: ERROR connecting");
 
 	//read in plain text file
-	char* plainText = readFile(arg[1]);
+	char* plainText = readFile(argv[1]);
 
 	//read in key text file
-	char* keyText = readFile(arg[2]);
+	char* keyText = readFile(argv[2]);
 
 	// Clear out the buffer array
 	memset(buffer, '\0', sizeof(buffer));
